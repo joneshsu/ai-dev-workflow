@@ -1,0 +1,11 @@
+# 機密（真實值絕不進 repo；請提供 .env.example 作為範本）
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.p12
+
+# 個人的 AI 工具設定（共用設定請放在 .claude/settings.json）
+.claude/settings.local.json

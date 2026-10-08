@@ -1,0 +1,7 @@
+# commit 前自動掃描機密（不分 AI 工具，人寫的程式碼也一樣檢查）
+# 安裝：pip install pre-commit && pre-commit install
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.0   # 請更新為最新版本
+    hooks:
+      - id: gitleaks

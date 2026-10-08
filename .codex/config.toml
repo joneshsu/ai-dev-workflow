@@ -1,0 +1,36 @@
+# Codex 專案設定範例（語法以 Codex 官方文件為準，版本差異請自行調整）
+# 若你的 Codex 版本不讀取專案層級設定，請把內容合併到 ~/.codex/config.toml。
+
+approval_policy = "on-request"          # 需要越過沙箱限制時先問我
+default_permissions = "project-safe"
+
+[permissions.project-safe]
+extends = ":workspace"                   # 只能寫入工作目錄
+
+# 禁止讀取的檔案（相對於專案根目錄）——必須與 docs/ai-security.md 的清單一致
+[permissions.project-safe.filesystem.":workspace_roots"]
+"**/.env" = "deny"
+"**/.env.*" = "deny"
+"secrets" = "deny"
+"**/*.pem" = "deny"
+"**/*.key" = "deny"
+
+[permissions.project-safe.filesystem]
+glob_scan_max_depth = 5
+
+# 網路預設關閉；只開放套件來源
+[features]
+network_proxy = true
+
+[permissions.project-safe.network]
+enabled = true
+
+[permissions.project-safe.network.domains]
+"github.com" = "allow"
+"registry.npmjs.org" = "allow"
+"pypi.org" = "allow"
+"files.pythonhosted.org" = "allow"
+
+# 執行指令時，過濾掉名稱含 KEY / SECRET / TOKEN 的環境變數
+[shell_environment_policy]
+ignore_default_excludes = false

@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git describe *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npm publish *)",
+      "Bash(docker *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(./secrets/**)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./**/*.p12)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(curl *)",
+      "Bash(wget *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "denyRead": [
+        "./.env",
+        "./.env.*",
+        "./**/.env",
+        "./**/.env.*",
+        "./secrets",
+        "~/.ssh",
+        "~/.aws"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "*.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org"
+      ]
+    }
+  }
+}
